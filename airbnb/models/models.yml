@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: airbnb_src # A logical name for the source system
+    # Optional: specify the database if it differs from the dbt profile's default
+    database: airbnb 
+    schema: raw # The physical schema name in your database
+
+    tables:
+      - name: raw_listings # The physical table name
+        # Optional: add a description for documentation
+        description: >
+          Raw listings data from the Airbnb application.
+      
+      - name: raw_reviews
+        description: Raw reviews data from the Airbnb application.
+
+      - name: raw_hosts
+        description: Raw hosts data from the Airbnb application.
