@@ -7,13 +7,17 @@ sources:
     tables:
       - name: listings # The physical table name
         identifier: raw_listings # Optional: specify the identifier if it differs from the table name
-        # Optional: add a description for documentation
         description: >
           Raw listings data from the Airbnb application.
       
       - name: reviews
         identifier: raw_reviews
         description: Raw reviews data from the Airbnb application.
+        config:
+          loaded_at_field: date
+          freshness:
+            warn_after: {count: 1, period: hour}
+            error_after: {count: 24, period: hour}
 
       - name: hosts
         identifier: raw_hosts
