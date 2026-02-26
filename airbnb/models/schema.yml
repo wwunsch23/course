@@ -3,6 +3,10 @@ version: 2
 models:
   - name: dim_listings_cleansed
     description: "This table contains the details of the listings, including the listing ID, name, host ID, host name, neighborhood group, neighborhood, latitude, longitude, room type, price, minimum nights, number of reviews, last review date, reviews per month, calculated host listings count, and availability 365."
+    data_tests:
+      - minimum_row_count:
+          arguments:
+            min_row_count: 1000
     columns:
       - name: listing_id
         description: "The unique identifier for each listing."
@@ -31,10 +35,9 @@ models:
           - positive_values
 
   - name: dim_hosts_cleansed
-    description: "This table contains the details of the hosts, including the host ID, host name'
     config:
-      contract:
-        enforced: true
+        contract:
+          enforced: true
     columns:
       - name: host_id
         description: "The unique identifier for each host."
@@ -43,14 +46,14 @@ models:
           - not_null
           - unique
       - name: host_name
-        description: "The name of the host."
+        description: "The name of the host. 'Anonymous' is used for hosts who have chosen to hide their identity."
         data_type: string
       - name: is_superhost
-        description: "Indicates whether the host is a superhost (True/False)."
+        description: "Indicates whether the host is a superhost (true) or not (false)."
         data_type: string
       - name: created_at
         description: "The date and time when the host profile was created."
-        data_type: timestamp
+        data_type: timestamp        
       - name: updated_at
         description: "The date and time when the host profile was last updated."
         data_type: timestamp
