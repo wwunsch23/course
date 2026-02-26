@@ -24,3 +24,33 @@ models:
           - accepted_values:
               arguments:
                 values: ['Shared room', 'Hotel room', 'Private room', 'Entire home/apt']
+      - name: minimum_nights
+        description: "The minimum number of nights required to book the listing."
+        data_tests:
+          - not_null
+          - positive_values
+
+  - name: dim_hosts_cleansed
+    description: "This table contains the details of the hosts, including the host ID, host name'
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: host_id
+        description: "The unique identifier for each host."
+        data_type: integer
+        data_tests:
+          - not_null
+          - unique
+      - name: host_name
+        description: "The name of the host."
+        data_type: string
+      - name: is_superhost
+        description: "Indicates whether the host is a superhost (True/False)."
+        data_type: string
+      - name: created_at
+        description: "The date and time when the host profile was created."
+        data_type: timestamp
+      - name: updated_at
+        description: "The date and time when the host profile was last updated."
+        data_type: timestamp
