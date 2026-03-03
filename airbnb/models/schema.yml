@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_listings_cleansed
-    description: "This table contains the details of the listings, including the listing ID, name, host ID, host name, neighborhood group, neighborhood, latitude, longitude, room type, price, minimum nights, number of reviews, last review date, reviews per month, calculated host listings count, and availability 365."
+    description: "This table contains the details of the Airbnb listings, including the listing ID, name, host ID."
     data_tests:
       - minimum_row_count:
           arguments:
@@ -14,7 +14,7 @@ models:
           - not_null
           - unique
       - name: host_id
-        description: "The unique identifier for each host."
+        description: "The unique identifier for each host. References the host_id in the dim_hosts_cleansed table."
         data_tests:
           - not_null
           - relationships:
@@ -29,7 +29,7 @@ models:
               arguments:
                 values: ['Shared room', 'Hotel room', 'Private room', 'Entire home/apt']
       - name: minimum_nights
-        description: "The minimum number of nights required to book the listing."
+        description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
         data_tests:
           - not_null
           - positive_values
