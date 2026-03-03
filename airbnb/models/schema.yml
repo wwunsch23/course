@@ -38,6 +38,7 @@ models:
     config:
         contract:
           enforced: true
+    description: "This table contains the details of the Airbnb hosts, including the host ID, name, and superhost status."
     columns:
       - name: host_id
         description: "The unique identifier for each host."
@@ -48,9 +49,16 @@ models:
       - name: host_name
         description: "The name of the host. 'Anonymous' is used for hosts who have chosen to hide their identity."
         data_type: string
+        data_tests:
+          - not_null
       - name: is_superhost
         description: "Indicates whether the host is a superhost (true) or not (false)."
         data_type: string
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['t', 'f']
       - name: created_at
         description: "The date and time when the host profile was created."
         data_type: timestamp        
